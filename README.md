@@ -11,34 +11,46 @@
 <p>El objetivo de este proyecto es demostrar cómo se pueden gestionar los datos (registros), permitiendo al usuario realizar diversas operaciones como:</p>
 <div>
 	<li>Crear un archivo con registros.</li>
-	<p>Permite agregar registros con información como número de producto, nombre, cantidad, precio, etc.</p>
+	<p>Permite agregar registros con información como número de Socios, apellido y nombre, etc.</p>
 </div>
 <div>
-	<li>Dar de alta un registro, ej: Un producto.</li>
-	<p>Permite agregar un nuevo producto al archivo existente.</p>
+	<li>Dar de alta un registro, ej: Un Socios.</li>
+	<p>Permite agregar un nuevo Socios al archivo existente.</p>
 </div>
 <div>
-	<li>Modificar un registro, ej: Un producto.</li>
-	<p>Permite modificar los datos de un producto previamente ingresado, usando su código único.</p>
+	<li>Eliminar un registro lógicamente, ej: Un Socios.</li>
+	<p>Permite marcar un Socios como eliminado sin borrarlo físicamente del archivo.</p>
 </div>
 <div>
-	<li>Eliminar un registro lógicamente, ej: Un producto.</li>
-	<p>Permite marcar un producto como eliminado sin borrarlo físicamente del archivo.</p>
+	<li>Buscar Socio segun su numero.</li>
+	<p>Permite, dado un numero de socio, encantrarlo o no en el archivo.</p>
 </div>
 <div>
-	<li>Eliminar un registro fisicamente, ej: Un producto.</li>
-	<p>Permite generar un nuevo archivo con los productos no eliminados, eliminando así los productos marcados como dados de baja.</p>
+	<li>Crear un listado con los registros del archivo.</li>
+	<p>Permite crear una lista de Socios que no fueron dados de baja (Socio dado de baja: socio.num == 0).</p>
 </div>
 
 <h3>Implementación</h3>
 <p>El proyecto está implementado en lenguaje C y se enfoca en la manipulación de archivos binarios. El programa incluye varias funciones que permiten interactuar con el archivo y gestionar productos en él:</p>
+
+<h3>Tipo de apertura de archivos</h3>
+```c
+arch = fopen(nomArch, "rb");
+arch = fopen(nomArch, "ab");
+arch = fopen(nomArch, "rb+");
+```
 <ul>
-    <li><strong>leerProducto</strong>: Función que lee los datos de un producto desde el teclado.</li>
-    <li><strong>crearArchivo</strong>: Crea un archivo binario con productos ingresados por el usuario.</li>
-    <li><strong>altaProducto</strong>: Agrega un nuevo producto al archivo.</li>
-    <li><strong>modificarProd</strong>: Modifica los datos de un producto con un código específico.</li>
-    <li><strong>eliminarProdLog</strong>: Elimina un producto lógicamente (lo marca como eliminado). </li>
-    <li><strong>eliminarProdFis</strong>: Elimina físicamente los productos dados de baja al crear un nuevo archivo.</li>
+    <li><strong>leerSocio</strong>: Modulo que lee los datos de un Socios desde el teclado.</li>
+    <li><strong>mostrarSocio</strong>: Modulo que muestra la info de un socio.</li>
+	<li><strong>mostrarLista</strong>: Modulo que muestra la lista creada.</li>
+	<li><strong>mostrarMenu</strong>: Modulo que muestra las opciones del menu.</li>
+	<li><strong>existe</strong>: Modulo que nos que busca en el archivo un socio segun su numero.</li>
+	<li><strong>alta</strong>: Modulo que da de alta un socio si no existe.</li>
+	<li><strong>baja</strong>: Modulo que da de baja un socio si existe.</li>
+	<li><strong>crearNodo</strong>: Modulo que crea el nodo para la lista.</li>
+	<li><strong>agregarAdelante</strong>: Modulo que agrega adelante en la lista el nodo creado anteriormente.</li>
+	<li><strong>generarLista</strong>: Modulo que genera la lista.</li>
+	<li><strong>menu</strong>: Modulo del menu.</li>
 </ul>
 
 ### Librerias

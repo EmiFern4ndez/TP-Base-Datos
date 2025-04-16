@@ -33,7 +33,8 @@
 <h3>Implementación</h3>
 <p>El proyecto está implementado en lenguaje C y se enfoca en la manipulación de archivos binarios. El programa incluye varias funciones que permiten interactuar con el archivo y gestionar productos en él:</p>
 
-<h3>Tipo de apertura de archivos</h3>
+### Modo de apertura
+
 ```c
 arch = fopen(nomArch, "rb");
 arch = fopen(nomArch, "ab");

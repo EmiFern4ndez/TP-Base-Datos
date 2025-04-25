@@ -43,13 +43,10 @@ arch = fopen(nomArch, "rb+");
 <ul>
     <li><strong>leerSocio</strong>: Modulo que lee los datos de un Socios desde el teclado.</li>
     <li><strong>mostrarSocio</strong>: Modulo que muestra la info de un socio.</li>
-	<li><strong>mostrarLista</strong>: Modulo que muestra la lista creada.</li>
 	<li><strong>mostrarMenu</strong>: Modulo que muestra las opciones del menu.</li>
 	<li><strong>existe</strong>: Modulo que nos que busca en el archivo un socio segun su numero.</li>
 	<li><strong>alta</strong>: Modulo que da de alta un socio si no existe.</li>
 	<li><strong>baja</strong>: Modulo que da de baja un socio si existe.</li>
-	<li><strong>crearNodo</strong>: Modulo que crea el nodo para la lista.</li>
-	<li><strong>agregarAdelante</strong>: Modulo que agrega adelante en la lista el nodo creado anteriormente.</li>
 	<li><strong>listarSocios</strong>: Modulo que genera un listado de socios y los muestra por pantalla.</li>
 	<li><strong>menu</strong>: Modulo del menu.</li>
 </ul>

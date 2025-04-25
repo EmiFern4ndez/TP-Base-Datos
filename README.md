@@ -50,7 +50,7 @@ arch = fopen(nomArch, "rb+");
 	<li><strong>baja</strong>: Modulo que da de baja un socio si existe.</li>
 	<li><strong>crearNodo</strong>: Modulo que crea el nodo para la lista.</li>
 	<li><strong>agregarAdelante</strong>: Modulo que agrega adelante en la lista el nodo creado anteriormente.</li>
-	<li><strong>generarLista</strong>: Modulo que genera la lista.</li>
+	<li><strong>listarSocios</strong>: Modulo que genera un listado de socios y los muestra por pantalla.</li>
 	<li><strong>menu</strong>: Modulo del menu.</li>
 </ul>
 

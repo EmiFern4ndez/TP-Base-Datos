@@ -84,47 +84,35 @@ void baja(char nomArch[20], int num){
                     socio.num = 0;
                     fseek(arch, -sizeof(Socio), SEEK_CUR); // Retrocede al inicio del registro
                     fwrite(&socio, sizeof(Socio), 1, arch);
+                    fflush(arch);
                 }
             }
             fclose(arch);
             printf("\nSe elimino con exito el socio\n");
-        }else
+        }else{
+            fclose(arch);
             printf("\nNo existe el socio\n");
+        }
     }
-    fclose(arch);
 }
 
-Lista crearNodo(Socio s){
-    Lista nue = (Lista)malloc(sizeof(struct lista));
-    nue ->dato = s;
-    nue ->sig = NULL;
-    return nue;
-}
-
-void agregarAdelante (Lista *l, Socio s){
-    Lista nue = malloc(sizeof(Lista));
-    nue->dato = s;                                
-    nue->sig = *l;
-    *l = nue;
-}
-
-void generarLista(char nomArch[20], Lista *l){
+void listarSocios(char nomArch[20]){
     FILE *arch;
-    Socio s;
     arch = fopen(nomArch, "rb");
-    while (fread(&s, sizeof(Socio), 1, arch)){
-        if (s.num != 0){
-            agregarAdelante(l, s);
+    int cantSocios = 0;
+    if (arch != NULL){
+        Socio socio;
+        while (fread(&socio, sizeof(Socio), 1, arch)){
+            if (socio.num != 0){
+                printf("Nombre y apellido: %s\n Dni: %d\n Numero de socio: %d\n Fech. Nacimiento: %s\n Fech. Asociacion: %s\n", socio.apeynom, socio.dni, socio.num, socio.nacimiento, socio.asociacion);
+                cantSocios++;
+            }
+        }
+        if (cantSocios == 0){
+            printf("El archivo no tiene socios registrados\n");
         }
     }
     fclose(arch);
-}
-
-void mostrarLista(Lista l){
-    if (l != NULL){
-        mostrarSocio(l->dato);
-        mostrarLista(l->sig);
-    }
 }
 
 void mostrarMenu(){
@@ -142,7 +130,6 @@ void menu(char nomArch[20]){
     int opcion;
     Socio s;
     int numSocio;
-    Lista l = NULL;
     mostrarMenu();
     scanf("%d", &opcion);
     while (opcion < 1 || opcion > 5) {
@@ -178,11 +165,7 @@ void menu(char nomArch[20]){
             }
 
             case 4:{
-                generarLista(nomArch, &l);
-                if (l != NULL){
-                    mostrarLista(l);
-                }else
-                    printf("\nEl archivo esta vacio\n");
+                listarSocios(nomArch);
                 break;
             }
 

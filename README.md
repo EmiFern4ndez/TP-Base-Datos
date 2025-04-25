@@ -72,7 +72,7 @@ arch = fopen(nomArch, "rb+");
 <h4>AUTOR:</h4>
 
 - Emiliano Fernández
-- Gerardo
-- Esteban
+- Gerardo Henriquez
+- Esteban Lisjak
 
 ---

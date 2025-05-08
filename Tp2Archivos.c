@@ -1,13 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
+#define datos 40
+#define fechas 12
 
 typedef struct socio{
     int num;
     int dni;
-    char apeynom[40];
-    char domicilo[20];
-    char nacimiento[10];
-    char asociacion[10];
+    char apeynom[datos];
+    char domicilo[datos];
+    char nacimiento[fechas];
+    char asociacion[fechas];
 }Socio;
 
 typedef struct lista{
@@ -18,17 +20,26 @@ typedef struct lista{
 void leerSocio(Socio *s){
     printf("Ingrese el numero:");
     scanf("%d", &s->num);
+    // Limpiar el buffer de entrada después de leer un entero
+    while (getchar() != '\n');
     printf("Ingrese el dni:");
     scanf("%d", &s->dni);
+    // Limpiar el buffer de entrada después de leer un entero
+    while (getchar() != '\n');
     printf("Ingrese el Apellido y Nombre:");
-    scanf("%s", s->apeynom);
+    fgets(s->apeynom, datos, stdin);
+    // Eliminar el salto de línea que fgets puede agregar al final
+    s->apeynom[strcspn(s->apeynom, "\n")] = 0;
     printf("Ingrese el Domicilio:");
-    scanf("%s", s->domicilo);
+    fgets(s->domicilo, datos, stdin);
+    s->domicilo[strcspn(s->domicilo, "\n")] = 0;
     printf("Ingrese el nacimiento:");
-    scanf("%s", s->nacimiento);
+    fgets(s->nacimiento, fechas, stdin);
+    s->nacimiento[strcspn(s->nacimiento, "\n")] = 0;
     printf("Ingrese la fecha de asociacion:");
-    scanf("%s", s->asociacion);
-}
+    fgets(s->asociacion, fechas, stdin);
+    s->asociacion[strcspn(s->asociacion, "\n")] = 0;
+} 
 
 void mostrarSocio(Socio s){
     printf("---------------------------\n");
@@ -41,7 +52,7 @@ void mostrarSocio(Socio s){
     printf("---------------------------\n");
 }
 
-int existe(char nomArch[20], int num){
+int existe(char nomArch[datos], int num){
     FILE *arch;
     arch = fopen(nomArch, "rb");
     int ok = 0;
@@ -58,7 +69,7 @@ int existe(char nomArch[20], int num){
     return ok;
 }
 
-void alta(char nomArch[20], Socio s){
+void alta(char nomArch[datos], Socio s){
     if (!existe(nomArch, s.num)){
         FILE *arch;
         arch = fopen(nomArch, "ab");
@@ -73,7 +84,7 @@ void alta(char nomArch[20], Socio s){
     }
 }
 
-void baja(char nomArch[20], int num){
+void baja(char nomArch[datos], int num){
     FILE *arch;
     arch = fopen(nomArch, "rb+");
     if (arch != NULL){
@@ -96,7 +107,7 @@ void baja(char nomArch[20], int num){
     }
 }
 
-void listarSocios(char nomArch[20]){
+void listarSocios(char nomArch[datos]){
     FILE *arch;
     arch = fopen(nomArch, "rb");
     int cantSocios = 0;
@@ -104,7 +115,7 @@ void listarSocios(char nomArch[20]){
         Socio socio;
         while (fread(&socio, sizeof(Socio), 1, arch)){
             if (socio.num != 0){
-                printf("Nombre y apellido: %s\n Dni: %d\n Numero de socio: %d\n Fech. Nacimiento: %s\n Fech. Asociacion: %s\n", socio.apeynom, socio.dni, socio.num, socio.nacimiento, socio.asociacion);
+                printf(" *************************\n Nombre y apellido: %s\n Dni: %d\n Numero de socio: %d\n Fech. Nacimiento: %s\n Fech. Asociacion: %s\n *************************\n \n", socio.apeynom, socio.dni, socio.num, socio.nacimiento, socio.asociacion);
                 cantSocios++;
             }
         }
@@ -126,7 +137,7 @@ void mostrarMenu(){
     printf("---------------------------\n");
 }
 
-void menu(char nomArch[20]){
+void menu(char nomArch[datos]){
     int opcion;
     Socio s;
     int numSocio;
@@ -184,7 +195,7 @@ void menu(char nomArch[20]){
 }
 
 int main(){
-    char nomArch[20];
+    char nomArch[datos];
     printf("Ingrese el nombre del archivo:");
     scanf("%s", nomArch);
     menu(nomArch);
